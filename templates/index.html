@@ -49,7 +49,7 @@
             <nav class="sidesubnavbar">
                 <img src="{{url_for('static', filename = 'img/rewards.webp')}}">
                 <p>Unlock special offers & great benifits</p>
-                <button class="login" onclick="document.getElementById('id01').style.display='block'">Login / Register</button>
+                <button class="login" onclick="window.location.href='{{ url_for('login') }}'">Login / Register</button>
             </nav>
 
             <a href="#">
@@ -145,7 +145,7 @@
                 <div class="right-container">
                     <a href="#" class="location">Kollam<ion-icon name="caret-down-sharp"></ion-icon></a>
                     <button class="signin"
-                        onclick="document.getElementById('id01').style.display='block'">Signin</button>
+                    <button class="login" onclick="window.location.href='{{ url_for('login') }}'">Login</button>
 
                     <div id="id01" class="modal">
 
@@ -413,6 +413,8 @@
     </div>
     <!-- End wrapper -->
 
+    <script>
+    </script>
 </body>
 
 </html>
