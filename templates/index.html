@@ -44,13 +44,21 @@
         <nav class="sidebar">
 
             <nav class="sidenavbar">
-                <h1>Hey!</h1>
+                {% if user %}
+                <h1>Hey, {{(user.username).split(" ")[0]}}!</h1>
+                    {% else %}
+                <h1>Hey, Guest!</h1>
+                {% endif %}
             </nav>
 
             <nav class="sidesubnavbar">
                 <img src="{{url_for('static', filename = 'img/rewards.webp')}}">
                 <p>Unlock special offers & great benifits</p>
+                {% if user %}
+                <div class="login">{{user.username}}</div>
+                {% else %}
                 <button class="login" onclick="window.location.href='/login' ">Login / Register</button>
+                {% endif %}
             </nav>
 
             <a href="#">
@@ -144,10 +152,12 @@
                         placeholder='Search for Movies, Events, Plays, Sports, and Activities'></input>
                 </div>
                 <div class="right-container">
-                    <a href="#" class="location">Kollam<ion-icon name="caret-down-sharp"></ion-icon></a>
-                    <!-- <button class="signin"  -->
-                    <button class="login" onclick="window.location.href='/login'">Login</button>
-
+                    <a href="#" class="location">Kolkata<ion-icon name="caret-down-sharp"></ion-icon></a>
+                    {% if user %}
+                <div class="signin active">{{user.username.split(" ")[0]}}</div>
+                {% else %}
+                    <button class="signin" onclick="window.location.href='/login'">Login</button>
+                        {% endif %}
                     <div id="id01" class="modal">
 
                         <div class="modal-content">
