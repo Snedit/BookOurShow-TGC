@@ -251,6 +251,7 @@ ul.navitem1 li {
 .movie {
     position: relative;
     width: 100%;
+    cursor: pointer;
 }
 
 .card-container {

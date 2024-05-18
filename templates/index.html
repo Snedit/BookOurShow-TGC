@@ -15,6 +15,7 @@
         integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <link rel="stylesheet" href="assets/css/jquery.mCustomScrollbar.min.css">
     <link rel="stylesheet" href="{{url_for('static', filename = 'style.css')}}">
+    <link rel="stylesheet" href="{{url_for('static', filename = 'book.css')}}">
 
     <!-- Javascript -->
     <script src="assets/js/jquery-3.3.1.min.js"></script>
@@ -227,8 +228,13 @@
 
             <script src="{{url_for('static', filename = 'data.js')}}"></script>
             <script src="{{url_for('static', filename = 'app.js')}}"></script>
+            <script src="{{url_for('static', filename = 'book.js')}}"></script>
 
             <h1 class="title">Recommended Movies</h1>
+            <div class="specialContainer">
+<!-- this is a dynamic container, it will be used for multiple purposes -->
+
+            </div>
             <div class="movies-list">
                 <div class="card-container">
 
