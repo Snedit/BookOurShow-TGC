@@ -70,7 +70,16 @@ def login():
             
     return render_template('login.html')
 
-
+@app.route('/add_points')
+@login_required
+def add_points():
+    user_id = session.get('user_id')
+    if user_id:
+        # Assuming each click adds 500 points
+        collection.update_one({'_id': ObjectId(user_id)}, {'$inc': {'points': 500}})
+        return redirect(url_for('user_index', user_id=user_id))
+    else:
+        return redirect(url_for('index'))
 
 @app.route('/register', methods=['POST'])
 def register():

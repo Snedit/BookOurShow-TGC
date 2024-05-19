@@ -65,6 +65,7 @@
                 <p>Unlock special offers & great benifits</p>
                 {% if user %}
                 <div class="login">{{user.username}}</div> <div class="points">Points : {{user.points}}</div>
+                <button class="button" id="addPointsBtn">Add Points</button>
                 {% else %}
                 <button class="login" onclick="window.location.href='/login' ">Login / Register</button>
                 {% endif %}
@@ -461,11 +462,11 @@
     <!-- End wrapper -->
 
         {% if show_alert %}
-        <script>
-                document.addEventListener('DOMContentLoaded', function() {
+        /*<script>
+             /*   document.addEventListener('DOMContentLoaded', function() {
                 var points = {{ user.points }};
                 alert('You have ' + points + ' points.');
-            });
+            });*/
         </script>
     {% endif %}
     <script>
@@ -478,6 +479,12 @@
                     ican.src = "{{url_for('static', filename = 'img/sun.png')}}";
                 }
             }
+
+            $(document).ready(function() {
+    $('#addPointsBtn').click(function() {
+        window.location.href = '/add_points';
+    });
+});
     </script>
 </body>
 
