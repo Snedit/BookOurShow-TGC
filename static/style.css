@@ -998,12 +998,14 @@ div .text {
     /* Increased size for the div */
     width: 500px; /* Adjust width as needed */
     height: 300px; /* Adjust height as needed */
-    background-color: #fff;
-    border: 1px solid #ddd;
-    border-radius: 5px;
+    background-color: #333;
+    color: white;
+    border: 2px solid #ddd;
+    border-radius: 10px;
     padding: 30px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.178);
     display: none;
+    
   }
   
   .recharge-message {
