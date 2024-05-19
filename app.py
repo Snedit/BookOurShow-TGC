@@ -62,7 +62,7 @@ def login():
         
         if existing_user:
             session['user_id'] = str(existing_user['_id'])  # Store the user_id in the session
-
+            session['show_alert'] = True
             print(str(existing_user['_id']))
             return redirect(url_for('user_index', user_id=session['user_id']))  # Redirect to user_index route with user_id
         else:

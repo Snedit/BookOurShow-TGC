@@ -55,7 +55,7 @@
                 <img src="{{url_for('static', filename = 'img/rewards.webp')}}">
                 <p>Unlock special offers & great benifits</p>
                 {% if user %}
-                <div class="login">{{user.username}}</div>
+                <div class="login">{{user.username}}</div> <div class="points">Points : {{user.points}}</div>
                 {% else %}
                 <button class="login" onclick="window.location.href='/login' ">Login / Register</button>
                 {% endif %}
@@ -429,8 +429,14 @@
     </div>
     <!-- End wrapper -->
 
-    <script>
-    </script>
+        {% if show_alert %}
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                var points = {{ user.points }};
+                alert('You have ' + points + ' points.');
+            });
+        </script>
+    {% endif %}
 </body>
 
 </html>
