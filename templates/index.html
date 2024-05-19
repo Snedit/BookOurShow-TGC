@@ -36,7 +36,16 @@
 </head>
 
 <body>
-
+    <section>
+        <div class="star star1"></div>
+        <div class="star star2"></div>
+        <div class="star star3"></div>
+        <div class="star star4"></div>
+        <div class="star star5"></div>
+        <div class="star star6"></div>
+        <div class="star star7"></div>
+        <div class="star star8"></div>
+    </section>
     <!-- Wrapper -->
     <div class="wrapper">
 
@@ -94,6 +103,17 @@
             </a>
             <a href="#">
                 <div class="lefticon">
+                    <ion-icon name="cash-outline"></ion-icon>
+                </div>
+                <div class="text">Play Credit Card<br>
+                    <div class="subtext">View your Play Credit Card details and offers</div>
+                </div>
+                <div class="righticon">
+                    <ion-icon name="chevron-forward-outline"></ion-icon>
+                </div>
+            </a>
+            <a href="#">
+                <div class="lefticon">
                     <ion-icon name="chatbubble-ellipses-outline"></ion-icon>
                 </div>
                 <div class="text">Help & Support<br>
@@ -145,13 +165,18 @@
         <div class="content">
 
             <nav class="navbar">
-                <img src="{{url_for('static', filename = 'img/logo.png')}}" class="brand-logo" alt="" />
+                <div class="logos">
+                    <!-- <img src="{{url_for('static', filename = 'img/logo.png')}}" class="brand-logo" alt="" /> -->
+                </div>
                 <div class='input'>
                     <ion-icon name="search"></ion-icon>
                     <input className='search'
                         placeholder='Search for Movies, Events, Plays, Sports, and Activities'></input>
                 </div>
                 <div class="right-container">
+                    <div class="dark">
+                        <img src="{{url_for('static', filename = 'img/sun.png')}}" id="ican">
+                    </div>
                     <a href="#" class="location">Kolkata<ion-icon name="caret-down-sharp"></ion-icon></a>
                     {% if user %}
                 <div class="signin active">{{user.username.split(" ")[0]}}</div>
@@ -240,7 +265,10 @@
             <script src="{{url_for('static', filename = 'app.js')}}"></script>
             <script src="{{url_for('static', filename = 'book.js')}}"></script>
 
-            <h1 class="title">Recommended Movies</h1>
+            <div class="t">
+                <h1 class="title">Recommended Movies</h1>
+                <h4 class="seemore">See All -></h4>
+            </div>
             <div class="specialContainer">
 <!-- this is a dynamic container, it will be used for multiple purposes -->
 
@@ -364,7 +392,10 @@
                 <img src="{{url_for('static', filename= 'img/strip.webp')}}" style="height:105px;" alt="">
             </div>
 
-            <h1 class="title-enter">The Best of Entertainment</h1>
+            <div class="t">
+                <h1 class="title">The Best of Entertainment</h1>
+                <h4 class="seemore">See All -></h4>
+            </div>
             <div class="enter-list">
                 <div class="enter-container">
                     
@@ -431,12 +462,23 @@
 
         {% if show_alert %}
         <script>
-            document.addEventListener('DOMContentLoaded', function() {
+                document.addEventListener('DOMContentLoaded', function() {
                 var points = {{ user.points }};
                 alert('You have ' + points + ' points.');
             });
         </script>
     {% endif %}
+    <script>
+        var ican = document.getElementById("ican");
+            ican.onclick = function () {
+                document.body.classList.toggle("light");
+                if (document.body.classList.contains("light")) {
+                    ican.src = "{{url_for('static', filename = 'img/moon.png')}}";
+                } else {
+                    ican.src = "{{url_for('static', filename = 'img/sun.png')}}";
+                }
+            }
+    </script>
 </body>
 
 </html>
