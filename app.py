@@ -49,8 +49,10 @@ def user_index(user_id):
     
     user = collection.find_one({'_id': ObjectId(user_id)})
     print(user)
-    if user:
-        return render_template('index.html', user=user)
+    if user and user['points'] < 500:
+            return render_template('index.html', user=user, recharge_message="Your points balance is low. Please recharge to continue booking.")
+    else:
+            return render_template('index.html', user=user)
     return render_template('index')
 
 
@@ -63,7 +65,6 @@ def login():
         
         if existing_user:
             session['user_id'] = str(existing_user['_id'])  # Store the user_id in the session
-            session['show_alert'] = True
             print(str(existing_user['_id']))
             return redirect(url_for('user_index', user_id=session['user_id']))  # Redirect to user_index route with user_id
         else:
