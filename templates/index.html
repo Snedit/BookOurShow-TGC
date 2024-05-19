@@ -572,6 +572,7 @@
     <script>
         var ican = document.getElementById("ican");
             ican.onclick = function () {
+                animatelil();
                 document.body.classList.toggle("light");
                 if (document.body.classList.contains("light")) {
                     ican.src = "{{url_for('static', filename = 'img/moon.png')}}";

@@ -171,3 +171,19 @@ border-radius: 5px;
     .booking-card:hover span {
         opacity: 1;
     }
+
+
+    .ghumar{
+        animation: ghumar 1s linear ;
+        animation-iteration-count: 1;
+        transition: all 1s ease;
+    }
+    @keyframes ghumar {
+        0%{
+                transform: rotate(0deg);
+            }
+            100%{
+                
+                transform: rotate(360deg);
+        }
+    }
