@@ -80,7 +80,7 @@ section .star.star7 {
 
 section .star.star8 {
     animation-delay: -7s;
-    background: url(star8.png);
+    background: url(img/star8.png);
 }
 
 @keyframes animate {

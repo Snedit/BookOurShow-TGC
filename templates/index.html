@@ -64,7 +64,7 @@
                 <img src="{{url_for('static', filename = 'img/rewards.webp')}}">
                 <p>Unlock special offers & great benifits</p>
                 {% if user %}
-                <div class="login">{{user.username}}</div> <div class="points">Points : {{user.points}}</div>
+                <div class="points">Points : {{user.points}}</div>
                 <button class="button" id="addPointsBtn">Add Points</button>
                 {% else %}
                 <button class="login" onclick="window.location.href='/login' ">Login / Register</button>
@@ -80,7 +80,11 @@
                     <ion-icon name="chevron-forward-outline"></ion-icon>
                 </div>
             </a>
-            <a class="btn-disabled" href="#">
+            {% if user %}
+            <a onclick="showHistory()" >
+                {% else %}
+                <a class="btn-disabled" href="#">
+                    {% endif %}
                 <div class="lefticon">
                     <ion-icon name="ticket-outline"></ion-icon>
                 </div>
@@ -161,7 +165,7 @@
 
         <!-- Dark overlay -->
         <div class="overlay"></div>
-
+        <div class="historyContainer">  </div>
         <!-- Content -->
         <div class="content">
 
@@ -270,10 +274,11 @@
                 <h1 class="title">Recommended Movies</h1>
                 <h4 class="seemore">See All -></h4>
             </div>
-            <div class="specialContainer">
-<!-- this is a dynamic container, it will be used for multiple purposes -->
+            <div class="specialContainer"></div>
+            
+            <!-- this is a dynamic container, it will be used for multiple purposes -->
+            
 
-            </div>
             <div class="movies-list">
                 <div class="card-container">
 
@@ -482,10 +487,14 @@
 
             $(document).ready(function() {
     $('#addPointsBtn').click(function() {
-        window.location.href = '/add_points';
+        showAddPointsForm();
+        
+        
     });
 });
     </script>
+
+<audio id="success-sound" src="{{url_for('static', filename='title.wav')}}" preload="auto"></audio>
 </body>
 
 </html>
