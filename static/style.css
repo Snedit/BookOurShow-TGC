@@ -1006,6 +1006,10 @@ div .text {
     display: none;
   }
   
+  .recharge-message {
+    color: red;
+}
+
   .user-details.show {
     display: block;
   }

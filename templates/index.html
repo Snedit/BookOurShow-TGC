@@ -71,6 +71,11 @@
                 {% endif %}
             </nav>
 
+            {% if recharge_message %}
+            <p class="recharge-message">&#9888; {{ recharge_message }}</p>
+        {% endif %}
+    
+
             <a href="#">
                 <div class="lefticon">
                     <ion-icon name="notifications-outline"></ion-icon>
@@ -564,14 +569,6 @@
             </div>
         </div>
     </footer>
-        {% if show_alert %}
-        <script>
-             /*   document.addEventListener('DOMContentLoaded', function() {
-                var points = {{ user.points }};
-                alert('You have ' + points + ' points.');
-            });*/
-        </script>
-    {% endif %}
     <script>
         var ican = document.getElementById("ican");
             ican.onclick = function () {
