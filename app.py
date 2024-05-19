@@ -1,3 +1,4 @@
+import datetime
 from flask import Flask, render_template,request,redirect,url_for, session, jsonify, send_file
 from pymongo import MongoClient
 from dotenv import load_dotenv
@@ -70,16 +71,25 @@ def login():
             
     return render_template('login.html')
 
-@app.route('/add_points')
-@login_required
+
+@app.route('/add_points', methods=['POST'])
 def add_points():
-    user_id = session.get('user_id')
-    if user_id:
-        # Assuming each click adds 500 points
-        collection.update_one({'_id': ObjectId(user_id)}, {'$inc': {'points': 500}})
-        return redirect(url_for('user_index', user_id=user_id))
+    if 'user_id' in session:
+        user_id = session['user_id']
+        points_to_add = int(request.form['points'])
+        
+        # Update user points in the database
+        user = collection.find_one({'_id': ObjectId(user_id)})
+        if user:
+            new_points = user['points'] + points_to_add
+            collection.update_one({'_id': ObjectId(user_id)}, {'$set': {'points': new_points}})
+            return jsonify(success=True, newPoints=new_points)
+        else:
+            return jsonify(success=False), 400
     else:
-        return redirect(url_for('index'))
+        return jsonify(success=False), 401
+
+
 
 @app.route('/register', methods=['POST'])
 def register():
@@ -108,5 +118,93 @@ def register():
     
 
 
+
+@app.route('/user-details')
+@login_required
+def user_details():
+    if 'user_id' in session:
+        user_id = session['user_id']
+        user = collection.find_one({'_id': ObjectId(user_id)}, {'password': 0})  # Exclude the password from the result
+        if user:
+            user_details = {
+                'username': user['username'],
+                'email': user['email'],
+                'phone': user['phone'],
+                'points': user['points']
+            }
+            return jsonify({'user': user_details})
+    return jsonify({'error': 'User not logged in'}), 401
+
+
+
+@app.route('/confirm_booking', methods=['POST'])
+@login_required
+def confirm_booking():
+    user_id = session.get('user_id')
+    if not user_id:
+        return jsonify({'success': False, 'message': 'User not logged in.'}), 401
+
+    data = request.json
+    title = data.get('title')
+    detail = data.get('detail')
+    ticket_cost = data.get('ticketCost')
+    ticket_count = data.get('ticketCount')
+    poster = data.get('poster')
+
+    if not title or not detail or not ticket_cost or not ticket_count:
+        return jsonify({'success': False, 'message': 'Invalid booking details.'}), 400
+
+    total_cost = int(ticket_cost * ticket_count)
+
+    user = collection.find_one({'_id': ObjectId(user_id)})
+    if not user:
+        return jsonify({'success': False, 'message': 'User not found.'}), 404
+
+    current_points = int(user['points'])
+    print("current points ", current_points)
+    print("total ", total_cost)
+    if current_points < total_cost:
+        return jsonify({'success': False, 'message': 'Insufficient points.'}), 400
+
+    new_points = current_points - total_cost
+    collection.update_one(
+        {'_id': ObjectId(user_id)},
+        {'$set': {'points': new_points}}
+    )
+
+    booking_details = {
+        'user_id': ObjectId(user_id),
+        'title': title,
+        'detail': detail,
+        'ticket_count': ticket_count,
+        'total_cost': total_cost,
+        'timestamp': datetime.datetime.now(),
+        'poster':poster
+    }
+    db.booking.insert_one(booking_details)
+
+    return jsonify({'success': True, 'message': 'Booking confirmed!', 'newPoints': new_points})
+
+
+@app.route('/booking_history', methods=['GET'])
+def booking_history():
+    user_id = session.get('user_id')
+    if not user_id:
+        return jsonify({'success': False, 'message': 'User not logged in.'}), 401
+
+    bookings = list(db.booking.find({'user_id': ObjectId(user_id)}))
+    print(bookings)
+    for booking in bookings:
+        booking['_id'] = str(booking['_id'])
+        booking['user_id'] = str(booking['user_id'])
+        booking['timestamp'] = booking['timestamp'].strftime('%Y-%m-%d %H:%M:%S')
+
+    return jsonify({'success': True, 'bookings': bookings})
+
+
 if __name__ == "__main__":
     app.run(debug=True)
+
+
+
+
