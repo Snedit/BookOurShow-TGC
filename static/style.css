@@ -135,10 +135,13 @@ body {
     z-index: 9;
     display: flex;
     align-items: center;
+    justify-content: space-between;
+    flex-wrap: nowrap;
 }
 
 .logos {
-    width: 150px;
+    display: flex;
+    min-width: 150px;
     height: 40px;
     /* background: black; */
     background: var(--logo-url) no-repeat center center;
@@ -177,7 +180,7 @@ body {
 
 .input ion-icon {
     font-size: 25px;
-    padding-left: 25px;
+    padding-left: 5px;
     color: var(--1-color);
     font-weight: bold;
     width: 16px;
@@ -232,6 +235,7 @@ a.btn-customized {
 .dark {
     display: flex;
     padding-right: 15px;
+    padding-left: 15px;
     padding-top: 5px;
 }
 
@@ -469,8 +473,11 @@ ul.navitem1 li {
 .strip {
     display: flex;
     justify-content: center;
-    height: 10px;
     height: 100px;
+    margin: 20px;
+    background: url(img/strip.webp) no-repeat center center;
+    background-size: contain;
+    /* height: 100px; */
     /* padding-top: 50px; */
 }
 
@@ -818,4 +825,41 @@ div .text {
     height: 82%;
     width: 428px;
     /* Could be more or less, depending on screen size */
+}
+@media screen and (max-width: 768px) {
+    .subnavbar {
+        display: none;
+    }
+
+    .location {
+        display: none;
+    }
+
+    .card-container,
+    .movies-list,
+    .enter-list {
+        padding-left: 0;
+    }
+
+    .title {
+        padding-left: 20px;
+    }
+}
+
+@media screen and (max-width: 500px) {
+    .navbar {
+        padding-left: 0;
+    }
+
+    input {
+        display: none;
+    }
+}
+@media screen and (max-width: 900px) {
+
+    a.btn-customized,
+    .seemore {
+        padding-right: 10px;
+    }
+
 }
