@@ -33,11 +33,11 @@ function showHistory() {
                         <div class="booking-card" >
                             <img class= "posterBGticket" src="${booking.poster}">
                             <span>
-                            <h2>${booking.title}</h2
-                            <p>${booking.detail}</p>
-                            <p>Tickets: ${booking.ticket_count}</p>
-                            <p>Total Cost: ₹${booking.total_cost}</p>
-                            <p>Date: ${booking.timestamp}</p>
+                            <h2 class="ticketHead">${booking.title}</h2>
+                            <p class="genre">${booking.detail}</p>
+                            <p ><b>Tickets:</b> ${booking.ticket_count}</p>
+                            <p><b>Total Cost:</b> ₹${booking.total_cost}</p>
+                            <p><b>Date: </b>${booking.timestamp}</p>
                             </span>
                         </div>
                     `;

@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap');
+
 .specialContainer, .historyContainer
 {   display: none;
 
@@ -132,12 +134,14 @@ border-radius: 5px;
        box-sizing: border-box;
         overflow: hidden;
         position: relative;
+        font-family: 'Nunito', sans-serif;
     }
     .booking-card span{
         opacity: 0;
         
         transition: all 2s;
     }
+
     .booking-card h2{
         font-size: 1em;
     }
@@ -160,13 +164,13 @@ border-radius: 5px;
         max-width: 90%;
 
         object-fit: contain;
-        opacity: 50%;
+        opacity: 75%;
         transition: all 2s;
     }
     .booking-card:hover .posterBGticket
     {
         z-index: -1;
-        filter: blur(2px);
+        filter: blur(10px);
     }
     .booking-card:hover span {
         opacity: 1;
@@ -186,4 +190,21 @@ border-radius: 5px;
                 
                 transform: rotate(360deg);
         }
+    }
+
+.ticketHead{
+        text-align: center;
+        font-weight: bold;
+        text-shadow: 0 0 10px orangered;
+    }
+
+    .genre{
+        text-shadow: 0 0 10px rgb(220, 20, 167);
+        
+        width: fit-content;
+        
+        font-style: initial;
+        font-weight: bold;
+        
+        
     }
