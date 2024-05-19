@@ -180,7 +180,18 @@
                     </div>
                     <a href="#" class="location">Kolkata<ion-icon name="caret-down-sharp"></ion-icon></a>
                     {% if user %}
-                <div class="signin active">{{user.username.split(" ")[0]}}</div>
+                <div onclick="showUserDetails()" class="signin active">{{user.username.split(" ")[0]}}</div>
+                
+                <div class="user-details" id="user-details" style="display: none;">
+                    <h2>User Details:</h2>
+                    <p>Name: {{ user.username }}</p>
+                    <p>Email: {{ user.email }}</p>
+                    <p>Email: {{ user.phone }}</p>
+                    <p>Points: {{ user.points }}</p>
+                    <button class="close-btn" onclick="hideUserDetails()">Close</button>
+                </div>
+                
+                
                 {% else %}
                     <button class="signin" onclick="window.location.href='/login'">Login</button>
                         {% endif %}
@@ -540,7 +551,6 @@
                 </ul>
             </li>
         </ul>
-    
         <div class="legal">
             <p>&copy; 2019 Something. All rights reserved.</p>
     
@@ -550,7 +560,7 @@
         </div>
     </footer>
         {% if show_alert %}
-        /*<script>
+        <script>
              /*   document.addEventListener('DOMContentLoaded', function() {
                 var points = {{ user.points }};
                 alert('You have ' + points + ' points.');
@@ -573,6 +583,23 @@
         window.location.href = '/add_points';
     });
 });
+
+function showUserDetails() {
+    
+    var userDetailsDiv = document.querySelector('.user-details');
+    if (userDetailsDiv.style.display === 'none') {
+        userDetailsDiv.style.display = 'block';
+    } else {
+        userDetailsDiv.style.display = 'none';
+    }
+}
+function hideUserDetails() {
+    console.log("Hi")
+    var userDetailsDiv = document.querySelector('.user-details');
+    userDetailsDiv.style.display = 'none';
+}
+
+
     </script>
 </body>
 

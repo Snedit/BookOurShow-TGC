@@ -990,3 +990,48 @@ div .text {
         flex: 2 0px;
     }
 }
+.user-details {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    /* Increased size for the div */
+    width: 500px; /* Adjust width as needed */
+    height: 300px; /* Adjust height as needed */
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 30px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    display: none;
+  }
+  
+  .user-details.show {
+    display: block;
+  }
+  
+  .user-details h2 {
+    font-size: 28px; /* Increased font size for heading */
+    margin-bottom: 15px;
+    font-weight: bold;
+  }
+  
+  .user-details p {
+    font-size: 20px; /* Increased font size for paragraphs */
+    margin-bottom: 10px;
+  }
+  
+  .user-details button {
+    background-color: red; /* Red button color */
+    color: #fff; /* White text */
+    border: none;
+    border-radius: 3px;
+    padding: 12px 20px;
+    cursor: pointer;
+  }
+  
+  .user-details button:hover {
+    background-color: #990000; /* Darker red on hover */
+  }
+  
+  
