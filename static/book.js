@@ -259,3 +259,15 @@ function playSound(soundId) {
         sound.play();
     }
 }
+
+function animatelil()
+
+{
+    const ican = document.getElementById("ican");
+    
+    ican.classList.add("ghumar");
+    setTimeout(() => {
+        
+        ican.classList.remove("ghumar");
+    }, 1000);
+}
