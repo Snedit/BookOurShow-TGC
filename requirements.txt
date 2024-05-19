@@ -1,5 +1,6 @@
 flask
 gunicorn
 pymongo
-dotenv
+python-dotenv
+geocoder
 bson
