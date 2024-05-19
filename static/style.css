@@ -1000,13 +1000,16 @@ div .text {
     height: 300px; /* Adjust height as needed */
     background-color: #333;
     color: white;
-    border: 2px solid #ddd;
+    border: 2px solid #08769a;
     border-radius: 10px;
     padding: 30px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.178);
+    box-shadow: 0 0 12px rgba(35, 14, 195, 0.488);
     display: none;
-    
+  background: url("https://wallpapers.com/images/hd/dark-gradient-6bly12umg2d4psr2.jpg");
+
+  background-position: center;
   }
+
   
   .recharge-message {
     color: red;
@@ -1020,6 +1023,9 @@ div .text {
     font-size: 28px; /* Increased font size for heading */
     margin-bottom: 15px;
     font-weight: bold;
+    text-shadow: 0 0 5px rgb(13, 128, 195);
+    text-align: center;
+    
   }
   
   .user-details p {
