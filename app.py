@@ -1,6 +1,5 @@
 import datetime
 from PIL import Image, ImageDraw, ImageFont
-import io
 from flask import Flask, render_template,request,redirect,url_for, session, jsonify, send_file
 from pymongo import MongoClient
 from dotenv import load_dotenv
