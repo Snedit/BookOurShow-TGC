@@ -171,8 +171,7 @@ function confirmBooking(title, detail, ticketCost, poster) {
             detail: detail,
             ticketCost: ticketCost,
             ticketCount: ticketCount,
-            poster:poster
-
+            poster: poster
         })
     })
     .then(response => response.json())
@@ -182,6 +181,43 @@ function confirmBooking(title, detail, ticketCost, poster) {
             updateUserPoints(data.newPoints);  // Update points in the UI
             document.querySelector("#cross").click();
             alert(`Booking confirmed for ${title}!\nTotal Cost: ₹${totalCost}`);
+            // Fetch the ticket image
+           
+            fetch('/generate_ticket', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    title: title,
+                    detail: detail,
+                    ticketCount: ticketCount,
+                    totalCost: totalCost
+                })
+            })
+            .then(response => {
+                if (response.ok) {
+                    return response.blob();
+                } else {
+                    throw new Error('Failed to generate ticket');
+                }
+            })
+            .then(blob => {
+                const url = window.URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.style.display = 'none';
+                a.href = url;
+                a.download = 'ticket.png';  // Specify the filename
+                document.body.appendChild(a);
+                a.click();
+                window.URL.revokeObjectURL(url);
+                console.log("Your ticket is downloading");
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('Error generating ticket: ' + error.message);
+            });
+
         } else {
             alert(`Booking failed: ${data.message}`);
         }
@@ -190,6 +226,7 @@ function confirmBooking(title, detail, ticketCost, poster) {
         alert('Error confirming booking: ' + error.message);
     });
 }
+
 
 
 

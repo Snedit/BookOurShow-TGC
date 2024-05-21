@@ -1,4 +1,6 @@
 import datetime
+from PIL import Image, ImageDraw, ImageFont
+import io
 from flask import Flask, render_template,request,redirect,url_for, session, jsonify, send_file
 from pymongo import MongoClient
 from dotenv import load_dotenv
@@ -201,6 +203,46 @@ def booking_history():
         booking['timestamp'] = booking['timestamp'].strftime('%Y-%m-%d %H:%M:%S')
 
     return jsonify({'success': True, 'bookings': bookings})
+
+
+@app.route('/generate_ticket', methods=['POST'])
+@login_required
+def generate_ticket():
+    data = request.json
+    title = data.get('title')
+    detail = data.get('detail')
+    ticket_count = data.get('ticketCount')
+    total_cost = data.get('totalCost')
+    user = collection.find_one({'_id': ObjectId(session['user_id'])})
+    print("user")
+    # Load the ticket image from the static folder
+    img = Image.open("ticket.png")
+    draw = ImageDraw.Draw(img)
+    
+    # Use default font
+    font = ImageFont.truetype('arial.ttf', 18)
+
+    text_color = (0,0,0)
+
+    text_position = [
+        (150, 100, f"Name: {user['username']}"),
+        (150, 125, f"Phone: +91 {user['phone']}"),
+        (150, 150, f"Email: {user['email']}"),
+        (150, 175, f"Movie: {title}"),
+        (150, 200, f"Details: {detail}"),
+        (150, 225, f"Tickets: {ticket_count}"),
+        (150, 250, f"Total Cost: ₹{total_cost}")
+    ]
+    
+    for pos in text_position:
+        draw.text((pos[0], pos[1]), pos[2], fill=text_color, font=font)
+    
+    # Save the image
+    output_path = ('static/generated_ticket.png')
+    img.save(output_path)
+
+    return send_file(output_path, as_attachment=True, mimetype='image/png')
+
 
 
 if __name__ == "__main__":
