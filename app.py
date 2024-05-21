@@ -219,7 +219,8 @@ def generate_ticket():
     draw = ImageDraw.Draw(img)
     
     # Use default font
-    font = ImageFont.truetype('arial.ttf', 18)
+    font_path = os.path.join(app.static_folder, 'fonts', 'Nunito-Regular.ttf')
+    font = ImageFont.truetype(font_path, 20) 
 
     text_color = (0,0,0)
 
